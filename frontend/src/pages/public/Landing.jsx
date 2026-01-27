@@ -136,7 +136,7 @@ export default function Landing() {
           <div className="lg:w-1/2 flex justify-center">
             <div className="bg-gradient-to-r from-blue-500 to-indigo-500 rounded-3xl p-8 shadow-2xl rotate-3">
               <div className="bg-white rounded-2xl p-8 -rotate-3 text-center">
-                <img src="https://cdn.ailandingpage.ai/landingpage_io/user-generate/67bc20cf-4634-47d6-b471-bc3f7c0c50e9/67bc20cf-4634-47d6-b471-bc3f7c0c50e9/hero/hero-main-c9ba135231b04787a15888fe03f664ee.png" alt="" srcset="" />
+                <img srcSet="https://cdn.ailandingpage.ai/landingpage_io/user-generate/67bc20cf-4634-47d6-b471-bc3f7c0c50e9/67bc20cf-4634-47d6-b471-bc3f7c0c50e9/hero/hero-main-c9ba135231b04787a15888fe03f664ee.png"/>
               </div>
             </div>
           </div>
