@@ -9,6 +9,8 @@ pnpm-debug.log*
 ##################################
 # Environment variables
 ##################################
+backend/.env
+frontend/.env
 .env
 .env.local
 .env.development
