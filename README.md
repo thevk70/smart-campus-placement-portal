@@ -119,6 +119,20 @@ cd backend
 npm install
 npm run dev
 
+## 🌍 Live Demo
+Frontend: https://smart-campus-frontend-cr2y.onrender.com  
+Backend: https://smart-campus-backend-dm1q.onrender.com 
+
+## 🔐 Demo Credentials
+Admin:
+email: admin@gmail.com
+password: Admin@123
+
+Student:
+email: student@gmail.com
+password: Student@123
+
+
 👤 Author
 
 Vishwajeet Kumar
