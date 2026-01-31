@@ -129,7 +129,7 @@ email: admin@gmail.com
 password: Admin@123
 
 Student:
-email: student@gmail.com
+email: thevk70@gmail.com
 password: Student@123
 
 
