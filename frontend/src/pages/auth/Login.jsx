@@ -21,7 +21,7 @@ export default function Login() {
     e.preventDefault();
     try {
       loginStart();
-      const res = await loginApi(form);
+      const res = await loginApi(form);   
       loginSuccess(res.data.data,navigate);
     } catch (err) {
       loginError(err.response?.data?.message || "Login failed");

@@ -9,16 +9,20 @@ export default function VerifyOtp() {
   const { state } = useLocation();
 
   const handleVerify = async () => {
+    if (!otp || otp.length !== 6) {
+      toast.warning("Please enter a valid 6-digit OTP");
+      return;
+    }
     try {
-      verifyOTPApi({
-        "userId": state.userId,
-        "otp": otp.toString()
+      const res = await verifyOTPApi({
+        userId: state.userId,
+        otp: otp.toString(),
       });
 
-      toast.success("Email verified. Please login.");
+      toast.success(res.data.message);
       navigate("/login");
     } catch (err) {
-      toast.error(err.response?.data?.message);
+      toast.error(err.response?.data?.message || "Invalid OTP");
     }
   };
 

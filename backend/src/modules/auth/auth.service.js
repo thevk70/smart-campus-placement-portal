@@ -2,6 +2,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../../models/user.model.js";
 import ApiError from "../../utils/ApiError.js";
+import { sendMail } from "../../services/mail.service.js";
+import { otpEmailTemplate } from "../../utils/OtpEmailTemplate.js";
 
 export const loginUser = async ({ email, password }) => {
   // 1. Check if user exists
@@ -42,19 +44,34 @@ export const loginUser = async ({ email, password }) => {
   };
 };
 
-export const registerUser = async ({ name, email, password }) => {
-  const existingUser = await User.findOne({ email });
-  if (existingUser) {
-    throw new ApiError(409, "Email already registered");
-  }
+export const registerUser = async ({ name, email, password, role },res) => {
+  const exists = await User.findOne({ email });
+    if (exists) {
+      return res.status(400).json({ message: "Email already registered" });
+    }
+  
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  
+    const user = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+      role,
+      otp,
+      otpExpiry: Date.now() + 10 * 60 * 1000 // 10 min
+    });
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  const user = await User.create({
-    name,
-    email,
-    password: hashedPassword,
+  res.status(201).json({
+    message: "OTP sent to email",
+    userId: user._id
   });
+  
+    sendMail({
+      to: email,
+      subject: "Verify your email - Smart Campus",
+      html: otpEmailTemplate({name,otp})
+    });
 
-  return user;
+    return user;
 };
