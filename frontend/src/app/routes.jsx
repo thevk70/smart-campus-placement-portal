@@ -13,7 +13,6 @@ import CreateJob from "../pages/admin/CreateJob";
 import Applications from "../pages/admin/Application";
 
 import ProtectedRoute from "./ProtectedRoute";
-import VerifyOtp from "../pages/auth/VerifyOtp";
 import JobDetails from "../pages/student/JobDetails";
 
 export default function AppRoutes() {
@@ -24,7 +23,6 @@ export default function AppRoutes() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/verify-otp" element={<VerifyOtp />} />
 
         {/* 👩‍🎓 Student Routes */}
         <Route
