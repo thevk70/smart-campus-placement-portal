@@ -25,20 +25,45 @@ export const useAuthStore = create((set) => ({
 
   loginError: (message) => set({ loading: false, error: message }),
 
-  register: async (data,navigate) => {
-    set({ loading: true });
-    try {
-      const res = await registerApi(data);
-      toast.success("OTP sent to your email");
-      navigate("/verify-otp",{
-        state: { userId: res.data.userId }
-      });
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Registration failed");
-    } finally {
-      set({ loading: false });
-    }
-  },
+  // register: async (data,navigate) => {
+  //   set({ loading: true });
+  //   try {
+  //     const res = await registerApi(data);
+  //     toast.success("OTP sent to your email");
+  //     navigate("/verify-otp",{
+  //       state: { userId: res.data.userId }
+  //     });
+  //   } catch (err) {
+  //     toast.error(err.response?.data?.message || "Registration failed");
+  //   } finally {
+  //     set({ loading: false });
+  //   }
+  // },
+
+  register: async (data) => {
+  set({ loading: true });
+
+  try {
+    const res = await registerApi(data);
+
+    toast.success("OTP sent to your email");
+
+    // ✅ return userId for OTP popup
+    return {
+      success: true,
+      userId: res.data.userId,
+    };
+
+  } catch (err) {
+    toast.error(err.response?.data?.message || "Registration failed");
+
+    return {
+      success: false,
+    };
+  } finally {
+    set({ loading: false });
+  }
+},
 
   logout: () => {
     localStorage.clear();
