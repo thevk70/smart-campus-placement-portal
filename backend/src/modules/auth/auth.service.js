@@ -44,34 +44,58 @@ export const loginUser = async ({ email, password }) => {
   };
 };
 
-export const registerUser = async ({ name, email, password, role },res) => {
+export const registerUser = async ({ name, email, password, role }, res) => {
   const exists = await User.findOne({ email });
-    if (exists) {
-      return res.status(400).json({ message: "Email already registered" });
-    }
-  
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-  
-    const user = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-      role,
-      otp,
-      otpExpiry: Date.now() + 10 * 60 * 1000 // 10 min
-    });
 
-  res.status(201).json({
-    message: "OTP sent to email",
-    userId: user._id
-  });
-  
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+  // ✅ CASE 1: User exists but NOT verified
+  if (exists && !exists.isVerified) {
+    exists.name = name;
+    exists.password = hashedPassword;
+    exists.role = role;
+    exists.otp = otp;
+    exists.otpExpiry = Date.now() + 10 * 60 * 1000;
+
+    await exists.save();
+
     sendMail({
       to: email,
       subject: "Verify your email - Smart Campus",
-      html: otpEmailTemplate({name,otp})
+      html: otpEmailTemplate({ name, otp }),
     });
 
-    return user;
+    return res.status(200).json({
+      message: "OTP resent. Please verify your email",
+      userId: exists._id,
+    });
+  }
+
+  // ❌ CASE 2: Already verified user
+  if (exists && exists.isVerified) {
+    return res.status(400).json({ message: "Email already registered" });
+  }
+
+  // ✅ CASE 3: New user
+  const user = await User.create({
+    name,
+    email,
+    password: hashedPassword,
+    role,
+    otp,
+    otpExpiry: Date.now() + 10 * 60 * 1000,
+    isVerified: false,
+  });
+
+  sendMail({
+    to: email,
+    subject: "Verify your email - Smart Campus",
+    html: otpEmailTemplate({ name, otp }),
+  });
+
+  return res.status(201).json({
+    message: "OTP sent to email",
+    userId: user._id,
+  });
 };

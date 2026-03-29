@@ -10,6 +10,7 @@ Admins can post jobs, view applicants, shortlist or reject candidates, and send 
 ## 🚀 Features
 
 ### 👩‍🎓 Student Features
+
 - Secure authentication (JWT)
 - View available jobs
 - Search & filter jobs by title, company, and skills
@@ -20,6 +21,7 @@ Admins can post jobs, view applicants, shortlist or reject candidates, and send 
 - Toast notifications & skeleton loaders
 
 ### 👨‍💼 Admin Features
+
 - Secure admin authentication
 - Create and manage job postings
 - View applicants for each job
@@ -28,7 +30,12 @@ Admins can post jobs, view applicants, shortlist or reject candidates, and send 
 - Role-based access control
 
 ## 📸 Screenshots
+
 ![Landing](screenshots/LandingPage.png)
+![Login](screenshots/LoginPng.png)
+![SignUp](screenshots/Register.png)
+![OTP Email](screenshots/EmailOtp.png)
+![OTP Verification](screenshots/OTPVerification.png)
 ![Student Dashboard](screenshots/user_JobList.png)
 ![Student Application](screenshots/user_ApplicationStatus.png)
 ![Student Profile](screenshots/user_Profile.png)
@@ -39,6 +46,7 @@ Admins can post jobs, view applicants, shortlist or reject candidates, and send 
 ## 🛠 Tech Stack
 
 ### Frontend
+
 - React (Vite)
 - Zustand (state management)
 - React Router
@@ -47,6 +55,7 @@ Admins can post jobs, view applicants, shortlist or reject candidates, and send 
 - CSS (custom UI)
 
 ### Backend
+
 - Node.js
 - Express.js
 - MongoDB + Mongoose
@@ -58,6 +67,7 @@ Admins can post jobs, view applicants, shortlist or reject candidates, and send 
 ## 📂 Project Structure
 
 ### Frontend
+
 src/
 ├── app/
 ├── components/
@@ -70,6 +80,7 @@ src/
 └── utils/
 
 ### Backend
+
 src/
 ├── modules/
 │ ├── auth
@@ -80,7 +91,6 @@ src/
 ├── models
 ├── routes.js
 └── server.js
-
 
 ---
 
@@ -97,31 +107,33 @@ src/
 ## ⚙️ Environment Variables
 
 ### Backend `.env`
+
 PORT=5000
 MONGO_URI=your_mongodb_connection
 JWT_SECRET=your_jwt_secret
 EMAIL_USER=your_email
 EMAIL_PASS=your_email_app_password
 
-
 ---
 
 ## ▶️ Run Locally
 
 ### Frontend
+
 cd frontend
 npm install
 npm run dev
 
 ### Backend
+
 ```bash
 cd backend
 npm install
 npm run dev
 
 ## 🌍 Live Demo
-Frontend: https://smart-campus-frontend-cr2y.onrender.com  
-Backend: https://smart-campus-backend-dm1q.onrender.com 
+Frontend: https://smart-campus-frontend-cr2y.onrender.com
+Backend: https://smart-campus-backend-dm1q.onrender.com
 
 ## 🔐 Demo Credentials
 Admin:
@@ -137,3 +149,4 @@ password: Student@123
 
 Vishwajeet Kumar
 MCA Student | MERN Stack Developer
+```

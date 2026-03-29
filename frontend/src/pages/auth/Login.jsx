@@ -31,15 +31,24 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 via-white to-blue-100 flex items-center justify-center px-6">
-
       {/* MAIN WRAPPER */}
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 bg-white rounded-3xl shadow-2xl overflow-hidden">
-
         {/* LEFT PANEL (DESIGN / BRANDING) */}
         <div className="hidden lg:flex flex-col justify-center relative p-14 bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
-
           {/* Decorative overlay */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.15),transparent_40%)]"></div>
+
+          {/* ✅ TOP BAR (FIXED POSITION) */}
+          <div className="flex items-center justify-between mb-6 pb-3 z-10">
+            <button
+              onClick={() => navigate(-1)}
+              className="w-20 h-10 flex items-center justify-center 
+             rounded-full bg-white shadow-md 
+             text-black hover:bg-gray-100 transition"
+            >
+              ⬅ <span className="mg-10">Back</span>
+            </button>
+          </div>
 
           <div className="relative z-10">
             <h1 className="text-4xl font-bold leading-tight mb-6">
@@ -62,7 +71,6 @@ export default function Login() {
         {/* RIGHT PANEL (LOGIN FORM) */}
         <div className="flex items-center justify-center p-8 sm:p-12 bg-white">
           <div className="w-full max-w-sm animate-slideInUpFast">
-
             {/* Header */}
             <div className="text-center mb-8">
               <div className="mx-auto w-14 h-14 flex items-center justify-center rounded-full bg-blue-600 text-white shadow-md mb-4">
@@ -114,9 +122,7 @@ export default function Login() {
             </form>
 
             {error && (
-              <p className="text-red-500 text-sm text-center mt-4">
-                {error}
-              </p>
+              <p className="text-red-500 text-sm text-center mt-4">{error}</p>
             )}
 
             <p className="text-sm text-center mt-6 text-gray-600">
