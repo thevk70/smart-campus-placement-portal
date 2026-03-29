@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { User, Mail, Lock } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { useAuthStore } from "../../store/auth.store";
 import VerifyOtpModal from "../auth/VerifyOtpModal";
 
 export default function Register() {
+  const navigate = useNavigate();
   const { register, loading } = useAuthStore();
 
   const [form, setForm] = useState({
@@ -16,6 +17,7 @@ export default function Register() {
 
   const [showOtp, setShowOtp] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -37,13 +39,23 @@ export default function Register() {
     <>
       {/* 🌈 Background */}
       <div className="min-h-screen bg-gradient-to-br from-slate-100 via-white to-blue-100 flex items-center justify-center px-6">
-
         {/* MAIN WRAPPER */}
         <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 bg-white rounded-3xl shadow-2xl overflow-hidden">
-
           {/* LEFT PANEL (DESKTOP ONLY) */}
           <div className="hidden lg:flex flex-col justify-center relative p-14 bg-gradient-to-br from-indigo-600 to-blue-700 text-white">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.15),transparent_40%)]"></div>
+
+            {/* ✅ TOP BAR (FIXED POSITION) */}
+            <div className="flex items-center justify-between mb-6 pb-3 z-10">
+              <button
+                onClick={() => navigate(-1)}
+                className="w-20 h-10 flex items-center justify-center 
+             rounded-full bg-white shadow-md 
+             text-black hover:bg-gray-100 transition"
+              >
+                ⬅ <span className="mg-10">Back</span>
+              </button>
+            </div>
 
             <div className="relative z-10">
               <h1 className="text-4xl font-bold leading-tight mb-6">
@@ -51,8 +63,8 @@ export default function Register() {
               </h1>
 
               <p className="text-lg text-blue-100 mb-8 max-w-md">
-                Join the placement portal to manage opportunities, profiles,
-                and career growth in one place.
+                Join the placement portal to manage opportunities, profiles, and
+                career growth in one place.
               </p>
 
               <ul className="space-y-4 text-blue-100 text-sm">
@@ -67,7 +79,6 @@ export default function Register() {
           {/* RIGHT PANEL (FORM) */}
           <div className="flex items-center justify-center p-8 sm:p-12 bg-white">
             <div className="w-full max-w-sm animate-slideInUpFast">
-
               {/* Header */}
               <div className="text-center mb-8">
                 <div className="mx-auto w-14 h-14 flex items-center justify-center rounded-full bg-indigo-600 text-white shadow-md mb-4">
@@ -98,13 +109,22 @@ export default function Register() {
                   onChange={handleChange}
                 />
 
-                <Input
-                  icon={<Lock size={18} />}
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  onChange={handleChange}
-                />
+                <div className="relative">
+                  <Input
+                    icon={<Lock size={18} />}
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    onChange={handleChange}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600"
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
 
                 <button
                   type="submit"

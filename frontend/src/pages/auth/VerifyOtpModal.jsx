@@ -73,14 +73,13 @@ export default function VerifyOtpModal({ isOpen, userId, onClose }) {
     <Modal
       open={isOpen}
       footer={null}
-      closable={!loading}               // 🔒 disable close while verifying
-      maskClosable={!loading}
+      closable={!loading} // 🔒 disable close while verifying
+      maskClosable={false}
+      keyboard={false}
       onCancel={onClose}
       centered
     >
-      <h2 className="text-xl font-semibold text-center mb-2">
-        Verify OTP
-      </h2>
+      <h2 className="text-xl font-semibold text-center mb-2">Verify OTP</h2>
       <p className="text-center text-gray-500 mb-4">
         Enter the 6-digit OTP sent to your email
       </p>
@@ -117,12 +116,7 @@ export default function VerifyOtpModal({ isOpen, userId, onClose }) {
       </div> */}
 
       {/* ACTION */}
-      <Button
-        type="primary"
-        block
-        loading={loading}
-        onClick={handleVerify}
-      >
+      <Button type="primary" block loading={loading} onClick={handleVerify}>
         Verify OTP
       </Button>
     </Modal>
