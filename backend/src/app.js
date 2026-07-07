@@ -7,15 +7,12 @@ import errorHandler from "./middlewares/error.middleware.js";
 const app = express();
 
 app.use(express.json());
-const corsOptions = {
-  origin: "https://smart-campus-frontend-cr2y.onrender.com/api",
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
 
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+app.use(
+  cors({
+    origin: "*",
+  }),
+);
 app.use(helmet());
 
 app.use("/api",routes);
