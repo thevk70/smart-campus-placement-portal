@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 const corsOptions = {
-  origin: "https://smart-campus-frontend-cr2y.onrender.com",
+  origin: "https://smart-campus-frontend-cr2y.onrender.com/api",
   credentials: true,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
